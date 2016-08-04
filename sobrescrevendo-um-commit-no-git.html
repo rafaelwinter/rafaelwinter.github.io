@@ -2,12 +2,12 @@
 <html lang="pt">
 
 <head>
-        <meta charset="utf-8">
+            <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-        <title>#winterdev - Archives</title>
+        <title>Sobrescrevendo Um Commit no Git</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="https://rafaelwinter.github.io/theme/css/bootstrap.min.css" rel="stylesheet">
@@ -31,13 +31,32 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-                <meta property="og:locale" content="">
+
+
+        <meta name="description" content="As vezes é preciso refazer nosso último commit, seja para adicionar arquivos ou corrigir outras coisas.">
+
+        <meta name="author" content="Rafael Winter">
+
+        <meta name="tags" content="git">
+
+	                <meta property="og:locale" content="">
 		<meta property="og:site_name" content="#winterdev">
-            <meta name="twitter:card" content="summary_large_image">
-            <meta name="twitter:site" content="@rafael_winter">
-            <meta name="twitter:title" content="#winterdev">
-            <meta name="twitter:description" content="View the blog.">
-                <meta name="twitter:image" content="https://rafaelwinter.github.io/theme/images/post-bg.jpg">
+
+	<meta property="og:type" content="article">
+            <meta property="article:author" content="https://rafaelwinter.github.io/author/rafael-winter.html">
+	<meta property="og:url" content="https://rafaelwinter.github.io/sobrescrevendo-um-commit-no-git.html">
+	<meta property="og:title" content="Sobrescrevendo Um Commit no Git">
+	<meta property="article:published_time" content="2013-04-02 01:56:00-03:00">
+            <meta property="og:description" content="As vezes é preciso refazer nosso último commit, seja para adicionar arquivos ou corrigir outras coisas.">
+
+            <meta property="og:image" content="https://rafaelwinter.github.io/theme/images/post-bg.jpg">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@rafael_winter">
+        <meta name="twitter:title" content="Sobrescrevendo Um Commit no Git">
+
+            <meta name="twitter:image" content="https://rafaelwinter.github.io/theme/images/post-bg.jpg">
+
+            <meta name="twitter:description" content="As vezes é preciso refazer nosso último commit, seja para adicionar arquivos ou corrigir outras coisas.">
 </head>
 
 <body>
@@ -74,7 +93,13 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="post-heading">
-                        <h1>Archives for #winterdev</h1>
+                        <h1>Sobrescrevendo Um Commit no Git</h1>
+                        <span class="meta">Posted by
+                                <a href="https://rafaelwinter.github.io/author/rafael-winter.html">Rafael Winter</a>
+                             on 02/04/2013 01:56
+                        </span>
+                            <span class="meta">Updated on 03/08/2016 19:50</span>
+                        
                     </div>
                 </div>
             </div>
@@ -85,17 +110,56 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <dl>
-            <dt>15/07/2016 02:38</dt>
-            <dd><a href="https://rafaelwinter.github.io/hello-world.html">Hello World</a></dd>
-            <dt>02/04/2013 01:56</dt>
-            <dd><a href="https://rafaelwinter.github.io/sobrescrevendo-um-commit-no-git.html">Sobrescrevendo Um Commit no Git</a></dd>
-            <dt>27/02/2013 01:15</dt>
-            <dd><a href="https://rafaelwinter.github.io/caindo-de-cabeca-no-ios-parte-1.html">Caindo de Cabeça no iOS - Parte 1</a></dd>
-            <dt>04/02/2013 09:31</dt>
-            <dd><a href="https://rafaelwinter.github.io/desenvolvendo-aplicativos-para-ios-6.html">CPBR6 - Desenvolvendo aplicativos para iOS 6</a></dd>
-        <hr>
-    </dl>
+    <!-- Post Content -->
+    <article>
+        <p>As vezes nós precisamos editar nosso último commit, quando esquecemos de adicionar um arquivo. Isso é simples de resolver e basta adicionar o arquivo e fazer um amend:</p>
+<div class="gist">
+    <script src='https://gist.github.com/5290002.js'></script>
+    <noscript>
+        <pre><code>git add MyClass.m
+git commit --amend</code></pre>
+    </noscript>
+</div>
+<p>Isso resolve o problema na maioria dos casos, mas vamos dizer que você tenha conseguido fazer uma proeza num commit, algo que realmente precisa ser descartado. No meu caso eu estava com o computador numa data futura e fiz commit e push sem me dar conta. Oops!</p>
+<p><img alt="Calma, tem jeito!" src="https://rafaelwinter.github.io/images/cry.jpg" /></p>
+<p>Eu resolvi voltando o meu HEAD para o commit anterior, com isso todos os arquivos do commit defeituoso ficaram como modificados ou untracked no meu repo. Isso permitiu que eu refizesse o commit usando a data correta e que forçasse um push para o github:</p>
+<div class="gist">
+    <script src='https://gist.github.com/5290027.js'></script>
+    <noscript>
+        <pre><code>git reset HEAD~1
+git add MeuArquivo1.m
+git rm -r MeuDir/
+git commit -m "Removes obsolete dir and adds new class"
+git push --force origin my_working_branch</code></pre>
+    </noscript>
+</div>
+<p>É importante usar o parâmetro --force no push, senão o git vai dizer que seu branch difere do remoto por um commit e vai pedir para você fazer um merge.</p>
+    </article>
+
+        <div class="tags">
+            <p>tags: <a href="https://rafaelwinter.github.io/tag/git.html">git</a></p>
+        </div>
+
+<hr>
+<div class="sharing">
+</div>
+    <hr>
+
+        <div class="comments">
+            <h2>Comments !</h2>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'winterdev';
+                var disqus_identifier = 'sobrescrevendo-um-commit-no-git.html';
+                var disqus_url = 'https://rafaelwinter.github.io/sobrescrevendo-um-commit-no-git.html';
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//winterdev.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
             </div>
         </div>
     </div>
